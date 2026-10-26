@@ -1,0 +1,244 @@
+/* ==========================================================================
+   QUALTY.AI DESIGN SYSTEM — REVERSE-ENGINEERED FROM PROVISIONLABS.COM
+   Pure architectural grid, OLED black, 120px hairline canvas, 
+   hairline-bordered cells, no rounded radii, electric ultramarine accent.
+   ========================================================================== */
+
+:root {
+  --black: #000000;
+  --accent: #0E00FF;        /* Electric Ultramarine Blue */
+  --accent-hover: #0B00CC;  /* Deepened blue on press */
+  --accent-lit: #6E60FF;    /* Lifted accent for 1px hairline highlights */
+  --accent-glow: rgba(14, 0, 255, 0.22);
+  --paper: #FFFFFF;
+  --hair-dark: #222222;     /* Primary 1px hairline cell border */
+  --hair-light: #333333;    /* Highlighted active border */
+  --hair-subtle: #171717;
+  --grid-dark: #141414;     /* 120px background grid lines */
+  --cell-bg: #050505;       /* Interior cell ground */
+  --cell-hover: #0c0c0c;
+  --on-dark: #9C9C9C;       /* Secondary neutral text */
+  --footer: #7A7A7A;        /* Captions and tertiary text */
+  --tag-bg: #111111;
+
+  --sans: var(--font-instrument), "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono: var(--font-mono), "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  --gut: clamp(18px, 3.4vw, 56px);
+}
+
+/* Base resets & typography */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--black);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--black);
+  color: var(--paper);
+  overflow-x: hidden;
+}
+
+/* Selection & focus */
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-lit);
+  outline-offset: 3px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Monospace micro-type (Provision style) */
+.mono {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-size: clamp(10px, 0.72vw, 11.5px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mono-sm {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+/* Grid canvas texture — repeating 120px hairline grid */
+.grid-canvas {
+  background-image:
+    repeating-linear-gradient(to right, var(--grid-dark) 0 1px, transparent 1px 120px),
+    repeating-linear-gradient(to bottom, var(--grid-dark) 0 1px, transparent 1px 120px);
+}
+
+/* Hairline border helpers */
+.border-hair-b { border-bottom: 1px solid var(--hair-dark); }
+.border-hair-t { border-top: 1px solid var(--hair-dark); }
+.border-hair-r { border-right: 1px solid var(--hair-dark); }
+.border-hair-l { border-left: 1px solid var(--hair-dark); }
+.border-hair { border: 1px solid var(--hair-dark); }
+
+/* Interactive state transitions */
+.cell-interactive {
+  background: var(--black);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.cell-interactive:hover {
+  background: var(--cell-hover);
+}
+
+/* Provision CTA Button */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: var(--accent);
+  color: var(--paper);
+  padding: 15px 24px;
+  font-family: var(--mono);
+  font-size: clamp(10.5px, 0.75vw, 12px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.15s ease, transform 0.1s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+.cta-btn:hover {
+  background: var(--accent-hover);
+}
+.cta-btn:active {
+  transform: translateY(1px);
+}
+.cta-btn .arrow {
+  font-family: var(--sans);
+  letter-spacing: 0;
+  transition: transform 0.15s ease;
+}
+.cta-btn:hover .arrow {
+  transform: translateX(3px);
+}
+
+/* Secondary Ghost / Hairline Button */
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid var(--hair-dark);
+  padding: 14px 22px;
+  font-family: var(--mono);
+  font-size: clamp(10.5px, 0.75vw, 12px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.cta-secondary:hover {
+  background: #111111;
+  border-color: var(--on-dark);
+}
+
+/* Live Status Pulse Dot */
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: #00FF66;
+  display: inline-block;
+  box-shadow: 0 0 10px #00FF66;
+  position: relative;
+}
+.status-dot-blue {
+  width: 7px;
+  height: 7px;
+  background: var(--accent);
+  display: inline-block;
+  box-shadow: 0 0 10px var(--accent-lit);
+  position: relative;
+}
+
+/* Custom crisp inputs (No rounded corners, pure architectural cells) */
+.cell-input {
+  width: 100%;
+  background: var(--black);
+  border: 1px solid var(--hair-dark);
+  color: var(--paper);
+  padding: 12px 14px;
+  font-family: var(--mono);
+  font-size: 13px;
+  transition: border-color 0.15s ease;
+}
+.cell-input:focus {
+  outline: none;
+  border-color: var(--accent-lit);
+}
+.cell-input::placeholder {
+  color: #444444;
+}
+
+/* Custom Range Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: var(--hair-dark);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid var(--paper);
+  transition: transform 0.1s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--black);
+}
+::-webkit-scrollbar-thumb {
+  background: #252525;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
