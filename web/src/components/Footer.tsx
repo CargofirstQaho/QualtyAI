@@ -1,101 +1,115 @@
 "use client";
 
 import React from "react";
+import { ShieldCheck } from "@phosphor-icons/react";
 
 export default function Footer() {
   return (
-    <footer className="border-hair-t" style={{ background: "var(--black)" }}>
-      {/* Metrics Row */}
-      <div
-        className="border-hair-b"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-        }}
-      >
-        <div className="border-hair-r" style={{ padding: "18px var(--gut)" }}>
-          <span className="mono" style={{ fontSize: "10px", color: "var(--footer)", display: "block" }}>
-            ENGINE STATUS
-          </span>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "4px" }}>
-            <span className="status-dot" style={{ width: "6px", height: "6px" }} />
-            <span className="mono" style={{ fontSize: "12px", color: "var(--paper)" }}>99.98% DISPATCH UPTIME</span>
+    <footer
+      style={{
+        borderTop: "1px solid var(--border-main)",
+        backgroundColor: "var(--bg-card)",
+        padding: "48px 20px 32px",
+      }}
+    >
+      <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+        {/* Metrics Row */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: "16px",
+            paddingBottom: "36px",
+            borderBottom: "1px solid var(--border-main)",
+            marginBottom: "36px",
+          }}
+        >
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              Network Dispatch
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginTop: "6px" }}>
+              <span className="status-indicator status-active" />
+              <span style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-main)" }}>
+                99.98% Active Uptime
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              Execution Protocol
+            </div>
+            <div style={{ marginTop: "6px" }}>
+              <span style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-main)" }}>
+                GAFTA 124 / ISO 24333
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              Process Timezone
+            </div>
+            <div style={{ marginTop: "6px" }}>
+              <span className="font-mono" style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-main)" }}>
+                UTC (Coordinated Universal Time)
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: 700, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
+              Backend Gateway
+            </div>
+            <div style={{ marginTop: "6px" }}>
+              <span style={{ fontSize: "14px", fontWeight: 600, color: "var(--text-main)" }}>
+                PostgreSQL // REST API
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="border-hair-r" style={{ padding: "18px var(--gut)" }}>
-          <span className="mono" style={{ fontSize: "10px", color: "var(--footer)", display: "block" }}>
-            PROCESS TIMEZONE
-          </span>
-          <div style={{ marginTop: "4px" }}>
-            <span className="mono" style={{ fontSize: "12px", color: "var(--paper)" }}>UTC (UNIVERSAL TIME)</span>
+        {/* Bottom Bar */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "16px",
+            fontSize: "13px",
+            color: "var(--text-muted)",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <div
+              style={{
+                width: "24px",
+                height: "24px",
+                borderRadius: "6px",
+                backgroundColor: "var(--accent-primary)",
+                color: "#FFFFFF",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontWeight: 700,
+                fontSize: "13px",
+              }}
+            >
+              Q
+            </div>
+            <span style={{ fontWeight: 600, color: "var(--text-main)" }}>Qualty.AI</span>
+            <span>— A CargoFirst Company. All rights reserved.</span>
           </div>
-        </div>
 
-        <div className="border-hair-r" style={{ padding: "18px var(--gut)" }}>
-          <span className="mono" style={{ fontSize: "10px", color: "var(--footer)", display: "block" }}>
-            SERVICE COMPLIANCE
-          </span>
-          <div style={{ marginTop: "4px" }}>
-            <span className="mono" style={{ fontSize: "12px", color: "var(--paper)" }}>GAFTA 124 / ISO 24333</span>
+          <div style={{ display: "flex", gap: "20px" }}>
+            <a href="#standards" style={{ color: "var(--text-secondary)" }}>Standards</a>
+            <a href="#simulator" style={{ color: "var(--text-secondary)" }}>Grain Calibrator</a>
+            <a href="#pipeline" style={{ color: "var(--text-secondary)" }}>Dual Testing</a>
+            <a href="#surveyors" style={{ color: "var(--text-secondary)" }}>Surveyor Hubs</a>
+            <a href="#api" style={{ color: "var(--text-secondary)" }}>API Docs</a>
           </div>
-        </div>
-
-        <div style={{ padding: "18px var(--gut)" }}>
-          <span className="mono" style={{ fontSize: "10px", color: "var(--footer)", display: "block" }}>
-            API BACKEND PORT
-          </span>
-          <div style={{ marginTop: "4px" }}>
-            <span className="mono" style={{ fontSize: "12px", color: "var(--paper)" }}>POSTGRESQL // PORT 3214</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer Links & Copyright Strip */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          padding: "24px var(--gut)",
-          gap: "16px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div
-            style={{
-              width: "14px",
-              height: "14px",
-              border: "1px solid var(--paper)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div style={{ width: "4px", height: "4px", background: "var(--accent)" }} />
-          </div>
-          <span className="mono" style={{ fontSize: "11px", color: "var(--on-dark)" }}>
-            QUALTY.AI &copy; 2026 CARGOFIRST PRODUCT ECOSYSTEM
-          </span>
-        </div>
-
-        <div style={{ display: "flex", gap: "24px", flexWrap: "wrap" }}>
-          <a href="#spec-simulator" className="mono" style={{ fontSize: "10.5px", color: "var(--footer)" }}>
-            GRAIN ENGINE
-          </a>
-          <a href="#pipeline" className="mono" style={{ fontSize: "10.5px", color: "var(--footer)" }}>
-            PIPELINE
-          </a>
-          <a href="#surveyors" className="mono" style={{ fontSize: "10.5px", color: "var(--footer)" }}>
-            SURVEYORS
-          </a>
-          <a href="#api" className="mono" style={{ fontSize: "10.5px", color: "var(--footer)" }}>
-            API SPECS
-          </a>
-          <a href="mailto:ops@cargofirst.com" className="mono" style={{ fontSize: "10.5px", color: "var(--accent-lit)" }}>
-            SUPPORT &rarr;
-          </a>
         </div>
       </div>
     </footer>

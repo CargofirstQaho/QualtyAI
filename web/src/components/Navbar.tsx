@@ -1,20 +1,24 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ArrowRight, Crosshair, ShieldCheck } from "@phosphor-icons/react";
+import { Sun, Moon, ArrowRight, ShieldCheck, Clock } from "@phosphor-icons/react";
+import { useTheme } from "@/context/ThemeContext";
 
 interface NavbarProps {
   onOpenEnquiry: () => void;
 }
 
 export default function Navbar({ onOpenEnquiry }: NavbarProps) {
+  const { theme, toggleTheme } = useTheme();
   const [utcTime, setUtcTime] = useState<string>("");
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
+    setMounted(true);
     const updateTime = () => {
       const now = new Date();
       setUtcTime(
-        now.toISOString().replace("T", " ").substring(0, 19) + " UTC"
+        now.toISOString().substring(11, 19) + " UTC"
       );
     };
     updateTime();
@@ -23,159 +27,213 @@ export default function Navbar({ onOpenEnquiry }: NavbarProps) {
   }, []);
 
   return (
-    <header className="border-hair-b" style={{ position: "sticky", top: 0, zIndex: 100, background: "rgba(0,0,0,0.92)", backdropFilter: "blur(12px)" }}>
-      <div style={{ display: "flex", alignItems: "stretch", width: "100%" }}>
-        {/* Brand Cell */}
+    <header
+      style={{
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        backgroundColor: "var(--nav-backdrop)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        borderBottom: "1px solid var(--border-main)",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1280px",
+          margin: "0 auto",
+          padding: "14px 20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: "16px",
+        }}
+      >
+        {/* Brand */}
         <a
           href="#top"
-          className="border-hair-r"
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "12px",
-            padding: "16px var(--gut)",
-            fontSize: "clamp(16px, 1.4vw, 19px)",
-            fontWeight: 600,
-            letterSpacing: "-0.035em",
-            whiteSpace: "nowrap",
+            gap: "10px",
+            textDecoration: "none",
           }}
         >
           <div
             style={{
-              width: "22px",
-              height: "22px",
-              border: "1px solid var(--paper)",
+              width: "32px",
+              height: "32px",
+              borderRadius: "8px",
+              backgroundColor: "var(--accent-primary)",
+              color: "#FFFFFF",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              position: "relative",
+              fontWeight: 700,
+              fontSize: "16px",
+              fontFamily: "var(--heading)",
             }}
           >
+            Q
+          </div>
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+              <span
+                className="font-heading"
+                style={{
+                  fontSize: "19px",
+                  fontWeight: 700,
+                  color: "var(--text-main)",
+                  letterSpacing: "-0.03em",
+                }}
+              >
+                Qualty
+              </span>
+              <span
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  color: "var(--accent-primary)",
+                  backgroundColor: "var(--accent-light)",
+                  padding: "1px 6px",
+                  borderRadius: "6px",
+                }}
+              >
+                AI
+              </span>
+            </div>
             <div
               style={{
-                width: "6px",
-                height: "6px",
-                background: "var(--accent)",
+                fontSize: "10.5px",
+                color: "var(--text-muted)",
+                letterSpacing: "0.02em",
+                fontWeight: 500,
               }}
-            />
+            >
+              Cargo Quality & Verification
+            </div>
           </div>
-          <span>
-            QUALTY<span style={{ color: "var(--accent-lit)", marginLeft: "2px" }}>.AI</span>
-          </span>
         </a>
 
-        {/* Live System Status Strip (Provision-style) */}
-        <div
-          className="border-hair-r"
+        {/* Navigation Links */}
+        <nav
           style={{
             display: "none",
             alignItems: "center",
-            gap: "12px",
-            padding: "0 24px",
-            color: "var(--on-dark)",
+            gap: "24px",
+            fontSize: "13.5px",
+            fontWeight: 500,
+            color: "var(--text-secondary)",
           }}
-          id="desktop-status"
-        >
-          <span className="status-dot" />
-          <span className="mono" style={{ fontSize: "10.5px" }}>
-            GAFTA & NABL ALIGNED · UTC: {utcTime || "SYNCING..."}
-          </span>
-        </div>
-
-        {/* Center / Navigation Links */}
-        <nav
-          style={{
-            display: "flex",
-            flex: 1,
-            alignItems: "stretch",
-            justifyContent: "flex-end",
-          }}
+          className="desktop-nav"
         >
           <a
-            href="#spec-simulator"
-            className="border-hair-l cell-interactive mono"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              padding: "0 20px",
-              fontSize: "11px",
-              color: "var(--on-dark)",
-            }}
+            href="#standards"
+            style={{ transition: "color 0.15s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           >
-            GRAIN SPECS
+            Standards
+          </a>
+          <a
+            href="#simulator"
+            style={{ transition: "color 0.15s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
+          >
+            Grain Calibrator
           </a>
           <a
             href="#pipeline"
-            className="border-hair-l cell-interactive mono"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              padding: "0 20px",
-              fontSize: "11px",
-              color: "var(--on-dark)",
-            }}
+            style={{ transition: "color 0.15s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           >
-            VERIFICATION
+            Dual Testing
           </a>
           <a
             href="#surveyors"
-            className="border-hair-l cell-interactive mono"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              padding: "0 20px",
-              fontSize: "11px",
-              color: "var(--on-dark)",
-            }}
+            style={{ transition: "color 0.15s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           >
-            SURVEYORS
+            Surveyor Network
           </a>
           <a
             href="#api"
-            className="border-hair-l cell-interactive mono"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              padding: "0 20px",
-              fontSize: "11px",
-              color: "var(--on-dark)",
-            }}
+            style={{ transition: "color 0.15s" }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent-primary)")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
           >
-            API
+            Developer API
           </a>
+        </nav>
 
-          {/* Primary Action Button */}
-          <button
-            onClick={onOpenEnquiry}
-            className="border-hair-l"
+        {/* Right Section: Time + Theme Toggle + CTA */}
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          {/* UTC Clock pill */}
+          <div
+            className="badge-pill"
             style={{
-              background: "var(--accent)",
-              color: "var(--paper)",
-              padding: "0 24px",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              cursor: "pointer",
-              transition: "background 0.15s ease",
+              backgroundColor: "var(--bg-subtle)",
+              color: "var(--text-muted)",
+              border: "1px solid var(--border-main)",
+              display: "none",
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "var(--accent-hover)")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "var(--accent)")}
+            id="utc-pill"
           >
-            <span className="mono" style={{ fontSize: "11px" }}>RAISE ENQUIRY</span>
+            <Clock size={13} />
+            <span className="font-mono" style={{ fontSize: "11px" }}>
+              {utcTime || "12:00:00 UTC"}
+            </span>
+          </div>
+
+          {/* Theme Toggle Button */}
+          {mounted && (
+            <button
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+              title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+              style={{
+                width: "36px",
+                height: "36px",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "var(--bg-subtle)",
+                color: "var(--text-secondary)",
+                border: "1px solid var(--border-main)",
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-strong)";
+                e.currentTarget.style.color = "var(--accent-primary)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "var(--border-main)";
+                e.currentTarget.style.color = "var(--text-secondary)";
+              }}
+            >
+              {theme === "light" ? <Moon size={18} weight="bold" /> : <Sun size={18} weight="bold" />}
+            </button>
+          )}
+
+          {/* Book Inspection CTA */}
+          <button onClick={onOpenEnquiry} className="btn-primary" style={{ padding: "8px 16px", fontSize: "13px" }}>
+            <span>Book Inspection</span>
             <ArrowRight size={14} weight="bold" />
           </button>
-        </nav>
+        </div>
       </div>
 
       <style jsx>{`
-        @media (min-width: 900px) {
-          #desktop-status {
+        @media (min-width: 840px) {
+          .desktop-nav {
             display: flex !important;
           }
-        }
-        @media (max-width: 640px) {
-          nav a {
-            display: none !important;
+          #utc-pill {
+            display: inline-flex !important;
           }
         }
       `}</style>

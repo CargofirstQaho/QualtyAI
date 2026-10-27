@@ -29,32 +29,32 @@ export default function Home() {
   };
 
   return (
-    <main id="top" style={{ minHeight: "100vh", background: "var(--black)", color: "var(--paper)" }}>
-      {/* Provision Header Strip */}
+    <main id="top" style={{ minHeight: "100vh", backgroundColor: "var(--bg-page)", color: "var(--text-main)" }}>
+      {/* Header Navbar with Theme Toggle */}
       <Navbar onOpenEnquiry={handleOpenEnquiry} />
 
-      {/* Hero Canvas with 120px hairline grid */}
+      {/* Hero Section */}
       <Hero onOpenEnquiry={handleOpenEnquiry} />
 
-      {/* Standards & Accreditation Strip (Backed-By Cell Row) */}
+      {/* Accreditations Strip */}
       <StandardsStrip />
 
-      {/* Section 01: Interactive Physical Grain Specification Engine */}
+      {/* Section 01: Physical Grain Calibrator */}
       <GrainSpecSimulator onInjectIntoEnquiry={handleInjectIntoEnquiry} />
 
       {/* Section 02: Dual Verification Pipeline (Physical vs Chemical) */}
       <DualPipeline />
 
-      {/* Section 03: Surveyor & Inspector Network Directory (Indian + International) */}
+      {/* Section 03: Surveyor & Inspector Directory */}
       <SurveyorNetwork />
 
       {/* Section 04: REST API Developer Gateway */}
       <ApiExplorer />
 
-      {/* Global Architectural Footer */}
+      {/* Footer */}
       <Footer />
 
-      {/* Interactive Modal Workflow for Raising Enquiries */}
+      {/* Enquiry Modal */}
       <EnquiryModal
         isOpen={isEnquiryOpen}
         onClose={handleCloseEnquiry}
