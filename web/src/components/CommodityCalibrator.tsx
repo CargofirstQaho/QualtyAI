@@ -807,3 +807,4 @@ export default function CommodityCalibrator({ onInjectIntoBooking }: CommodityCa
     </section>
   );
 }
+

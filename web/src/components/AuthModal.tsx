@@ -349,3 +349,4 @@ export default function AuthModal({ isOpen, onClose, onLoginSuccess }: AuthModal
     </div>
   );
 }
+
